@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace PatronesDiseño
 {
@@ -185,6 +186,61 @@ namespace PatronesDiseño
             rg.AddComponente(marco);
             rg.Dibujar();
             Console.ReadKey();
+            #endregion
+
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("=============================================");
+            Console.WriteLine(" PATRONES DE DISEÑO  -   COMPORTAMIENTO");
+            Console.WriteLine("=============================================");
+            System.Threading.Thread.Sleep(2000);
+            Console.WriteLine("[Pulse una tecla para continuar]");
+
+            #region "Facade"
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Comportamiento -> Cadena de responsabilidad");
+            Console.WriteLine("Solucion: Soluciona el problema de enviar un mensaje dentro de una jerarquia de objetos, que activará ciertos objetos al que vaya dirigido el mensaje");
+            Console.WriteLine("Ejemplo");
+            PatronesDiseño.Comportamiento.ChainOfResponsability.Capitan capitan = new Comportamiento.ChainOfResponsability.Capitan();
+            PatronesDiseño.Comportamiento.ChainOfResponsability.Sargento sargento1 = new Comportamiento.ChainOfResponsability.Sargento();
+            PatronesDiseño.Comportamiento.ChainOfResponsability.Sargento sargento2 = new Comportamiento.ChainOfResponsability.Sargento();
+            List<PatronesDiseño.Comportamiento.ChainOfResponsability.Cabo> cabos1 = new List<Comportamiento.ChainOfResponsability.Cabo>();
+            List<PatronesDiseño.Comportamiento.ChainOfResponsability.Cabo> cabos2 = new List<Comportamiento.ChainOfResponsability.Cabo>();
+            for (int i=0;i<3;i++)
+            {
+                PatronesDiseño.Comportamiento.ChainOfResponsability.Cabo aux = new Comportamiento.ChainOfResponsability.Cabo();
+                for(int j=0;j<4;j++)
+                {
+                    PatronesDiseño.Comportamiento.ChainOfResponsability.Soldado soldado = new Comportamiento.ChainOfResponsability.Soldado();
+                    aux.AddSucesor(soldado);
+                }
+                cabos1.Add(aux);
+                PatronesDiseño.Comportamiento.ChainOfResponsability.Cabo aux2 = new Comportamiento.ChainOfResponsability.Cabo();
+                for (int j = 0; j < 4; j++)
+                {
+                    PatronesDiseño.Comportamiento.ChainOfResponsability.Soldado soldado = new Comportamiento.ChainOfResponsability.Soldado();
+                    aux2.AddSucesor(soldado);
+                }
+                cabos2.Add(aux2);
+            }
+            foreach(var c in cabos1)
+            {
+                sargento1.AddSucesor(c);
+            }
+            foreach(var c in cabos2)
+            {
+                sargento2.AddSucesor(c);
+            }
+
+            capitan.AddSucesor(sargento1);
+            capitan.AddSucesor(sargento2);
+
+            ///Mandamos el mensaje con el nivel superior
+            capitan.Avisar(2000, "Prepara la tropa");
+            capitan.Avisar(700, "Avisar a vuestros cabos");
+            capitan.Avisar(400, "Soldados preparados");
+            capitan.Avisar(100, "A por el pastel :-D");
             #endregion
 
             Console.ReadKey();
