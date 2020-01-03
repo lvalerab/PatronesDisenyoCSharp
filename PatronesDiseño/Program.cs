@@ -7,11 +7,14 @@ namespace PatronesDiseño
     {
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Clear();
             Console.WriteLine("=============================================");
             Console.WriteLine(" PATRONES DE DISEÑO  -   Creacion");
             Console.WriteLine("=============================================");
             System.Threading.Thread.Sleep(2000);
-            Console.WriteLine("[Pulse una tecla para continuar]");
+            Console.WriteLine("[Maximice la pantalla y Pulse una tecla para continuar]");
             #region "Abstract Factory"
             Console.ReadKey();
             Console.Clear();
@@ -131,10 +134,60 @@ namespace PatronesDiseño
             bdDecorator.DibujaMarcoDoble();
             textComponent = new Estructurales.Decorator.TextComponent(2, 20, 4, 10, "Decorador fondo");
             PatronesDiseño.Estructurales.Decorator.DecoradorColorFondo dcDecorator = new Estructurales.Decorator.DecoradorColorFondo(textComponent,ConsoleColor.White);
-            dcDecorator.DibujaConFondo();
-            System.Console.ReadKey();
+            dcDecorator.DibujaConFondo();            
             #endregion
 
+
+            #region "Bridge"
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Estructurales -> Bridge");
+            Console.WriteLine("Solucion: Hace de paso de información entre dos clases diferentes");
+            Console.WriteLine("Ejemplo");
+            PatronesDiseño.Estructurales.Bridge.ClasePuente[] cp = {
+                                                                    new Estructurales.Bridge.ClasePuente(new Estructurales.Bridge.ImprementacionConcretaA()),
+                                                                    new Estructurales.Bridge.ClasePuente(new Estructurales.Bridge.ImplementacionConcretaB())
+                                                                   };
+            foreach(var c in cp)
+            {
+                c.Operacion();
+            }
+            #endregion
+
+            #region "Facade"
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Estructurales -> Facade");
+            Console.WriteLine("Solucion: Intenta definir una interfaz/clase para simplificar operaciones entre un subsistemas de clases mas complejos");
+            Console.WriteLine("Ejemplo");
+            PatronesDiseño.Estructurales.Facade.Fachada fachada = new Estructurales.Facade.Fachada();
+            fachada.RealizaOperacionCompleja();
+            #endregion
+
+
+            #region "Composite"
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Estructurales -> composite");
+            Console.WriteLine("Solucion: Define la dependencia de clases jerarquicas que tiene que hacer una misma accion, por ejemplo, pintar una pantalla");
+            Console.WriteLine("Ejemplo [Pulse una tecla]");
+            Console.Clear();
+            int antBufferWidth = Console.BufferWidth;
+            int antBufferHeigth = Console.BufferHeight;
+            PatronesDiseño.Estructurales.Composite.TextComponent tx = new Estructurales.Composite.TextComponent(10, 10, 10, 1, "Hola mundo");            
+            PatronesDiseño.Estructurales.Composite.GraphComponente gx = new Estructurales.Composite.GraphComponente(10, 16, 20, 20, 10);
+            PatronesDiseño.Estructurales.Composite.TextComponent tx2 = new Estructurales.Composite.TextComponent(10, 36, 10, 1, "Componente texto, debajo grafica");
+            PatronesDiseño.Estructurales.Composite.ReglaComponente rg = new Estructurales.Composite.ReglaComponente();
+            PatronesDiseño.Estructurales.Composite.ContenedorComponente marco = new Estructurales.Composite.ContenedorComponente(2, 2, 100, 40);
+            marco.AddComponente(tx);
+            marco.AddComponente(tx2);
+            marco.AddComponente(gx);
+            rg.AddComponente(marco);
+            rg.Dibujar();
+            Console.ReadKey();
+            #endregion
+
+            Console.ReadKey();
         }
     }
 }
