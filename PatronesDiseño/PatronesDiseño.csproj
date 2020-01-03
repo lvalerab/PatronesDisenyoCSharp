@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Estructurales\" />
-    <Folder Include="Comportamiento\" />
+    <Folder Include="Comportamiento\ChainOfResponsability\" />
   </ItemGroup>
 
 </Project>

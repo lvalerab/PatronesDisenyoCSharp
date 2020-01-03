@@ -8,7 +8,7 @@ namespace PatronesDiseño
         static void Main(string[] args)
         {
             Console.WriteLine("=============================================");
-            Console.WriteLine(" PATRONES DE DISEÑO");
+            Console.WriteLine(" PATRONES DE DISEÑO  -   Creacion");
             Console.WriteLine("=============================================");
             System.Threading.Thread.Sleep(2000);
             Console.WriteLine("[Pulse una tecla para continuar]");
@@ -99,6 +99,42 @@ namespace PatronesDiseño
             sg1.GetNumerosInstancias();
             sg2.GetNumerosInstancias();
             #endregion
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("=============================================");
+            Console.WriteLine(" PATRONES DE DISEÑO  -   Estructurales");
+            Console.WriteLine("=============================================");
+            System.Threading.Thread.Sleep(2000);
+            Console.WriteLine("[Pulse una tecla para continuar]");
+            
+            #region "Adapter"
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Estructurales -> Adapter o Wrapper");
+            Console.WriteLine("Solucion: Intenta adaptar una instancia de una clase a otra.");
+            Console.WriteLine("Ejemplo");
+            PatronesDiseño.Estructurales.AdapterOrWrapper.ClaseVieja claseVieja = new Estructurales.AdapterOrWrapper.ClaseVieja();
+            PatronesDiseño.Estructurales.AdapterOrWrapper.Adaptador adaptador = new Estructurales.AdapterOrWrapper.Adaptador(claseVieja);
+            adaptador.NewMethod();
+            #endregion
+
+            #region "Adapter"
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Estructurales -> Decorador");
+            Console.WriteLine("Solucion: Amplia funcionalidad sin reescribir la clase origen");
+            Console.WriteLine("Ejemplo");
+            PatronesDiseño.Estructurales.Decorator.TextComponent textComponent = new Estructurales.Decorator.TextComponent(2, 3, 4, 10, "Sin decorador");
+            textComponent.Dibujar();
+            textComponent = new Estructurales.Decorator.TextComponent(2, 12, 4, 10, "Decorador border doble");
+            PatronesDiseño.Estructurales.Decorator.DecoradorBorderDoble bdDecorator = new Estructurales.Decorator.DecoradorBorderDoble(textComponent);
+            bdDecorator.DibujaMarcoDoble();
+            textComponent = new Estructurales.Decorator.TextComponent(2, 20, 4, 10, "Decorador fondo");
+            PatronesDiseño.Estructurales.Decorator.DecoradorColorFondo dcDecorator = new Estructurales.Decorator.DecoradorColorFondo(textComponent,ConsoleColor.White);
+            dcDecorator.DibujaConFondo();
+            System.Console.ReadKey();
+            #endregion
+
         }
     }
 }
